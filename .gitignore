@@ -1,0 +1,36 @@
+--- Python Cache ---
+
+Ignora los archivos de caché y compilados de Python
+
+pycache/
+*.pyc
+*.pyo
+*.pyd
+
+--- Entornos Virtuales ---
+
+Ignora carpetas de entornos virtuales comunes
+
+venv/
+env/
+.venv/
+
+--- Archivos de IDE/Editor ---
+
+Ignora configuraciones de editores como VS Code
+
+.vscode/
+.idea/
+
+--- Archivos del Sistema Operativo ---
+
+Ignora archivos de sistema de macOS y Windows
+
+.DS_Store
+Thumbs.db
+
+--- DATOS DE LA APLICACIÓN (¡MUY IMPORTANTE!) ---
+
+Ignora la carpeta donde se guardan los archivos de los clientes
+
+axanet_clients/

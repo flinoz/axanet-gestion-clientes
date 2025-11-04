@@ -1,0 +1,82 @@
+# Nombre del Workflow
+name: 🔔 Notificador de Acciones de Clientes
+
+# Disparador: Se activa CADA VEZ que se abre un Issue.
+on:
+  issues:
+    types: [opened]
+
+# Tareas a ejecutar
+jobs:
+  notificar-al-equipo:
+    # Correr en el último Ubuntu disponible
+    runs-on: ubuntu-latest
+    
+    # Permisos para que la acción pueda escribir un comentario en el issue
+    permissions:
+      issues: write
+      
+    steps:
+      # Paso 1: Notificar Creación de Cliente
+      # Este paso SÓLO se ejecuta si el issue tiene la etiqueta 'accion: crear-cliente'
+      - name: Notificar Creación de Cliente
+        if: contains(github.event.issue.labels.*.name, 'accion: crear-cliente')
+        uses: actions/github-script@v6
+        with:
+          # ¡Importante! Reemplaza los usuarios de abajo
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: |
+                ## 🔔 Solicitud: Creación de Nuevo Cliente
+                Se ha solicitado la **creación** de un nuevo cliente.
+                
+                - **Solicitado por:** @${{ github.actor }}
+                - **Equipo notificado:** @usuario_ficticio1, @usuario_ficticio2
+                
+                Por favor, revisar los detalles en este issue y procesar con el script.
+            })
+
+      # Paso 2: Notificar Actualización de Cliente
+      # Este paso SÓLO se ejecuta si el issue tiene la etiqueta 'accion: actualizar-cliente'
+      - name: Notificar Actualización de Cliente
+        if: contains(github.event.issue.labels.*.name, 'accion: actualizar-cliente')
+        uses: actions/github-script@v6
+        with:
+          # ¡Importante! Reemplaza los usuarios de abajo
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: |
+                ## 🔔 Solicitud: Actualización de Cliente Recurrente
+                Se ha solicitado la **actualización** de un cliente existente.
+                
+                - **Solicitado por:** @${{ github.actor }}
+                - **Equipo notificado:** @usuario_ficticio1, @usuario_ficticio2
+                
+                Por favor, revisar los detalles en este issue y procesar con el script.
+            })
+
+      # Paso 3: Notificar Consulta de Cliente
+      # Este paso SÓLO se ejecuta si el issue tiene la etiqueta 'accion: consultar-cliente'
+      - name: Notificar Consulta de Cliente
+        if: contains(github.event.issue.labels.*.name, 'accion: consultar-cliente')
+        uses: actions/github-script@v6
+        with:
+          # ¡Importante! Reemplaza los usuarios de abajo
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: |
+                ## 🔔 Solicitud: Consulta de Cliente
+                Se ha solicitado la **consulta** de un cliente.
+                
+                - **Solicitado por:** @${{ github.actor }}
+                - **Equipo notificado:** @usuario_ficticio1, @usuario_ficticio2
+            })
