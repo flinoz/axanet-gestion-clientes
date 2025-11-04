@@ -24,7 +24,7 @@ Para ejecutar este proyecto, solo necesitas tener Python 3.x instalado en tu sis
 
 Clona el repositorio:
 
-git clone [https://github.com/TU_USUARIO/axanet-gestion-clientes.git](https://github.com/TU_USUARIO/axanet-gestion-clientes.git)
+git clone (https://github.com/flinoz/axanet-gestion-clientes.git)
 
 
 Navega al directorio del proyecto:
